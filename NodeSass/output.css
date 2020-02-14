@@ -1,2 +1,11 @@
-.red {
-  color: pink; }
+.parent .child {
+  color: red; }
+
+.parent-header {
+  font-weight: bolder;
+  font-size: 20px; }
+
+a {
+  color: blue; }
+  a:hover {
+    color: pink; }
