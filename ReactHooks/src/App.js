@@ -1,17 +1,19 @@
 import React, { useState, useMemo } from 'react';
 import Modal from './components/Modal/Modal'
 import './App.css'
+import Rem from './pages/Rem/Rem'
 
 function App() {
-  const [show,setShow] = useState(true);
+  const [show,setShow] = useState(false);
   const handleCanel = useMemo(() => () => setShow(false), [])
 
   // const handleCancelInner = () => setShow(false)
 
   return (
     <>
+    
       <button  onClick={()=>setShow(!show)}>点击</button >
-
+      <Rem />
       <Modal show={show} // 是否展示弹窗
              title="Title"  // title
             //  width="30%"  // Modal宽度
