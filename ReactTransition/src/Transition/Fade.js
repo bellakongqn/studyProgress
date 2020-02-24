@@ -8,6 +8,14 @@ const defaultStyle = {
   opacity: 0,
 }
 
+// const classMap = {
+//   entering: 'fade-transition-entering',
+//   entered: 'fade-transition-entered',
+//   exiting: 'fade-transition-exiting', 
+//   exited: 'fade-transition-exited',
+// }
+
+
 const transitionStyles = {
   entering: { opacity: 1 },
   entered:  { opacity: 1 },
@@ -18,7 +26,9 @@ const transitionStyles = {
 const Fade = ({ in: inProp }) => (
   <Transition in={inProp} timeout={duration}>
     {state => (
-      <div style={{
+      <div 
+        // className={classMap[state]}
+        style={{
         ...defaultStyle,
         ...transitionStyles[state]
       }}>

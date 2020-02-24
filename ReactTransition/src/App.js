@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import Fade from './Transition/Fade'
+import TransitionGroup from './Transition/TransitionGroup'
 import { CSSTransition,SwitchTransition} from 'react-transition-group'
 import './App.css'
 
@@ -9,12 +10,13 @@ function App() {
     return (
       <div>
         <Fade  in={inProp} timeout={500} />
-        {/* <CSSTransition in={inProp} timeout={200} classNames="my-node">
+        <CSSTransition in={inProp} timeout={200} classNames="my-node">
             <div>
             {"I'll receive my-node-* classes"}
             </div>
         </CSSTransition>
-        <SwitchTransition>
+        <TransitionGroup />
+        {/* <SwitchTransition>
             <Fade key={state ? "Goodbye, world!" : "Hello, world!"}
             addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
             classNames='fade' >
