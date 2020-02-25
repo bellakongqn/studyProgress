@@ -6,3 +6,16 @@
 6.模块对外输出变量 module.exports = variable; 输出的变量可以是任意对象、函数、数组等等
 7.要引入其他模块输出的对象 var foo = require('other_module');
 8.全局变量->javascript 函数闭包
+9.Buffer  String 
+  // Buffer -> String
+    var text = data.toString('utf-8');
+    console.log(text);
+ // String -> Buffer
+    var buf = Buffer.from(text, 'utf-8');
+    console.log(buf);
+10.同步异步
+在fs模块中，提供同步方法是为了方便使用。那我们到底是应该用异步方法还是同步方法呢？
+
+由于Node环境执行的JavaScript代码是服务器端代码，所以，绝大部分需要在服务器运行期反复执行业务逻辑的代码，必须使用异步代码，否则，同步代码在执行时期，服务器将停止响应，因为JavaScript只有一个执行线程。
+
+服务器启动时如果需要读取配置文件，或者结束时需要写入到状态文件时，可以使用同步代码，因为这些代码只在启动和结束时执行一次，不影响服务器正常运行时的异步执行。
