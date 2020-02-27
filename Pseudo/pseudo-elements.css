@@ -1,0 +1,15 @@
+p::first-letter {
+    color: red;
+}
+p::before{
+    content: "Hi,";
+}
+p::after{
+    content: '!!!!';
+}
+p::first-line {  
+    color: red;
+}
+p::selection{
+    color: blueviolet;
+}
