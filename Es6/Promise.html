@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Promise
+</body>
+<script>
+
+    
+    function runAsync1(){
+        var p = new Promise(function(resolve, reject){
+            //做一些异步操作
+            setTimeout(function(){
+                console.log('异步任务1执行完成');
+                resolve('随便什么数据1');
+            }, 1000);
+        });
+        return p;            
+    }
+    function runAsync2(){
+        var p = new Promise(function(resolve, reject){
+            //做一些异步操作
+            setTimeout(function(){
+                console.log('异步任务2执行完成');
+                resolve('随便什么数据2');
+            }, 6000);
+        });
+        return p;            
+    }
+    function runAsync3(){
+        var p = new Promise(function(resolve, reject){
+            //做一些异步操作
+            setTimeout(function(){
+                console.log('异步任务3执行完成');
+                resolve('随便什么数据3');
+            }, 6000);
+        });
+        return p;            
+    }
+
+    function async(){
+        // 声明立即调用 避免声明即被调用 将其用函数包裹起来
+        var p = new Promise((resolve, reject)=>{
+            //做一些异步操作
+            setTimeout(()=>{
+                var num = Math.ceil(Math.random()*10); //生成1-10的随机数
+                if(num<=5){
+                    resolve(num);
+                }
+                else{
+                    reject('数字太大了');
+                }
+            }, 2000);
+        });
+        return p;
+    }
+    // async().then(
+    //     (data)=>{
+    //         console.log('resolved');
+    //         console.log(data);
+    //     }, 
+    //     (reason)=>{
+    //         console.log('rejected');
+    //         console.log(reason);
+    //     }
+    // )
+    // async().then((data)=>{
+    //             console.log(data,'data')
+    //         }).catch((reason)=>{
+    //             console.log(reason,'reason');
+    //         })
+    
+    // Promise
+    //     .all([runAsync1(), runAsync2(), runAsync3()])
+    //     .then(function(results){
+    //         console.log(results);
+    //     });
+    
+    Promise
+        .race([runAsync1(), runAsync2(), runAsync3()])
+        .then(function(results){
+            console.log(results);
+        });
+
+    /*
+        https://blog.csdn.net/shan1991fei/article/details/78966297
+        //请求某个图片资源
+        function requestImg(){
+            var p = new Promise(function(resolve, reject){
+                var img = new Image();
+                img.onload = function(){
+                    resolve(img);
+                }
+                img.src = 'xxxxxx';
+            });
+            return p;
+        }
+        
+        //延时函数，用于给请求计时
+        function timeout(){
+            var p = new Promise(function(resolve, reject){
+                setTimeout(function(){
+                    reject('图片请求超时');
+                }, 5000);
+            });
+            return p;
+        }
+        
+        Promise
+        .race([requestImg(), timeout()])
+        .then(function(results){
+            console.log(results);
+        })
+        .catch(function(reason){
+            console.log(reason);
+        });
+    */
+    
+</script>
+</html>
