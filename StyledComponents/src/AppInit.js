@@ -19,7 +19,7 @@ const invertTheme = ({ fg, bg }) => ({
 });
   
 
-function App(){
+function AppInit(){
     return(
         <div>
             <Wrapper>
@@ -64,4 +64,4 @@ function App(){
     )
 }
 
-export default App;
+export default AppInit;

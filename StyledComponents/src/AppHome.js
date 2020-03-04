@@ -1,7 +1,7 @@
 import React from 'react'
 import ButtonCircle from './components/ButtonCircle'
 
-function App(){
+function AppHome(){
     return(
         <div>
             <ButtonCircle>ButtonCircle</ButtonCircle>
@@ -10,4 +10,4 @@ function App(){
     )
 }
 
-export default App;
+export default AppHome;
