@@ -45,3 +45,22 @@ Object.assign(user, permissions1, permissions2);
 Object.assign(user, { name: "Pete", isAdmin: true });
 
 // 在复制的时候应该检查 user[key] 的每一个值，如果它是一个对象，那么把它也复制一遍，这叫做深拷贝（deep cloning
+
+// 垃圾回收是自动完成的，我们不能强制执行或是阻止执行。
+// 当对象是可达状态时，它一定是存在于内存中的。
+// 被引用与可访问（从一个根）不同：一组相互连接的对象可能整体都不可达。
+
+
+// Symbol
+// Symbol 比较特殊，它不会被自动转换 。
+// Symbol.toString()  symbol.description 属性，只显示描述（description）
+
+// 如果我们要在对象字面量 {...} 中使用 Symbol，则需要使用方括号把它括起来。
+let id = Symbol("id");
+
+let user = {
+  name: "John",
+  [id]: 123 // 而不是 "id：123"
+};
+
+// Symbol 在 for…in 中会被跳过
