@@ -1,0 +1,164 @@
+$primary-color: #425C5A; // dark green
+$main-bg-color: #fff;
+
+$btn-bg: #FFCEA2;
+$btn-disabled: #ECBE95;
+
+$margin-small: 1.5rem;
+$btn-gutter:1rem;
+$card-gutter:3rem;
+
+$grid-wdth:38rem;
+
+
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%; // 10px
+}
+
+.home{
+    width: 100vw ;
+    background-color: $primary-color;
+    height: 100vh;
+    border-radius: 2rem;
+    padding: 4rem 1rem 0 1rem;
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: $margin-small;
+    }
+
+    .row-border{
+        border: 1px dashed $btn-bg;
+        margin-bottom: $margin-small;
+    }
+    .row{
+        width: 100%;
+        display: flex;
+        height: 6rem;
+        border-radius: 6px;
+        padding: 0 .5rem;
+
+        .col-1-of-3{
+            width: calc((100% - 2 * #{$btn-gutter})/3);
+            &:not(:last-child){
+                margin-right: $btn-gutter;
+            }
+            span{
+                display: block;
+                height: 4rem;
+                line-height: 4rem;
+                border-radius: 1rem;
+                margin-top: 1rem;
+                text-align: center;
+                font-size: 1.6rem;
+                font-weight: 500;
+                color: $btn-bg;
+                transition: all .2s;
+                &:hover{
+                    background: $btn-bg;
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+
+    .card{
+        height: 60vh;
+        background: $main-bg-color;
+        border-radius: 1rem;
+        padding-top: 2rem;
+        &-item{
+            padding: 1rem 1rem 0 1rem;
+            display: flex;
+            width: 100%;
+
+            .card__address{
+                height: 6rem;
+                padding-bottom: .4rem;
+                border-bottom: 1px solid #e7e7e7;
+                width: calc((100% - #{$card-gutter})/2);
+                &:not(:last-child){
+                    margin-right: $card-gutter;
+                }
+    
+                &--h1{
+                    font-size: 1.6rem;
+                    color: #d3d3d3;
+                    font-weight: 500;
+                    margin-bottom: .4rem; 
+                }
+    
+                &--h3{
+                    font-size: 1.6rem;
+                    color: $primary-color;
+                    font-weight: 550;
+                    letter-spacing: -.1rem;
+                }
+            }
+        }
+        
+        .btn-primary:link,
+        .btn-primary:visited{
+            text-align: center;
+            height: 4rem;
+            line-height: 4rem;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            color: $primary-color;
+            font-size: 1.6rem;
+            font-weight: 500;
+            background: $main-bg-color;
+            text-transform: uppercase;
+            border: 1px dashed $primary-color;
+            border-radius: 6px;
+
+            transition: all .3s;
+
+            &:hover{
+                background: $primary-color;
+                border: 1px solid transparent;
+                color: $btn-bg;
+            }
+        }
+
+        .split-line{
+            border: 1px dashed #e7e7e7;
+            position: relative;
+    
+            &::before,
+            &::after{
+                position: absolute;
+                top: -1rem;
+                content: '';
+                display: inline-block;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                background: $primary-color;
+            }
+
+            &::before{
+                left: -1rem;
+            }
+
+            &::after{
+                right: -1rem;
+                
+            }
+
+            
+        }
+    }
+    
+    
+}

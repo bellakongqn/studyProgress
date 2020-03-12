@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node-sass test.scss output.css",
-    "watch": "node-sass --watch test.scss output.css"
+    "build": "node-sass index.scss output.css",
+    "watch": "node-sass index.scss output.css --watch"
   },
   "keywords": [],
   "author": "",
