@@ -12,13 +12,17 @@ html{
     // this defines what 1rem is
     font-size: 62.5%;
 
-    // @include response(phone) {font-size: 50%;}
-    @include response(tab-land) {font-size: 56.25%;}  // 1rem = 9px  width<1200?
-    @include response(tab-port) {font-size: 50%;}  // 1rem = 8px 8/16 = 50%  width<900?
+    // @include respond(phone) {font-size: 50%;}
+    @include respond(tab-land) {font-size: 56.25%;}  // 1rem = 9px  width<1200?
+    @include respond(tab-port) {font-size: 50%;}  // 1rem = 8px 8/16 = 50%  width<900?
     
-    @include response(big-desktop) {font-size: 75%;}  // 1rem = 12px 
+    @include respond(big-desktop) {font-size: 75%;}  // 1rem = 12px 
 }
 
 body{
   box-sizing: border-box;
+  padding: 3rem;
+  @include respond(tab-port) {
+    padding: 0;
+  }
 }

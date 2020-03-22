@@ -26,10 +26,12 @@ $breakpoint arguement choices:
 - tab-land
 - big-desktop
 
+order: base + typography > general layout + grid > page layout > componets
+
 1em = 16px
 */
 
-@mixin response($breakpoint) {
+@mixin respond($breakpoint) {
     @if $breakpoint == phone{
         @media (max-width: 37.5em) {@content;}  // 600px
     }
