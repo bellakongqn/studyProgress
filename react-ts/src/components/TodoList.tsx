@@ -4,7 +4,7 @@ import * as React from 'react'
 import TodoItem from './TodoItem'
 // Import interfaces
 import { TodoListInterface } from './../interfaces'
-// TodoList component
+
 const TodoList = (props: TodoListInterface) => {
     return (
         <div className="todo-list">
@@ -12,11 +12,11 @@ const TodoList = (props: TodoListInterface) => {
                 {props.todos.map((todo) => (
                 <li key={todo.id}>
                     <TodoItem
-                    todo={todo}
-                    handleTodoUpdate={props.handleTodoUpdate}
-                    handleTodoRemove={props.handleTodoRemove}
-                    handleTodoComplete={props.handleTodoComplete}
-                    handleTodoBlur={props.handleTodoBlur}
+                        todo={todo}
+                        handleTodoUpdate={props.handleTodoUpdate}
+                        handleTodoRemove={props.handleTodoRemove}
+                        handleTodoComplete={props.handleTodoComplete}
+                        handleTodoBlur={props.handleTodoBlur}
                     />
                 </li>
                 ))}
