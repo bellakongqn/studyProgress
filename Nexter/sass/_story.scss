@@ -10,6 +10,7 @@
 
         background-image: linear-gradient(rgba($color-primary , .5), rgba($color-primary, .5)),
                             url('../img/back.jpg');
+        background-size: cover;
         @media only screen and (max-width: $bp-medium) {
             grid-column: 1 / -1;
             padding: 6rem;
