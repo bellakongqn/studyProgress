@@ -11,8 +11,13 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 // 请求拦截
 axios.interceptors.request.use( (config: AxiosRequestConfig) => {
-    // 一般在这个位置判断token是否存在 config.headers.Authorization = token
-    // getToken()
+    let token = window.localStorage.token;
+    if( token ){
+        console.log(token, ';amdcwkrjvhu')
+        config.headers.Authorization = token
+    }else{
+        window.location.href = '/login'
+    }
     return config;
 }, (error: any) => {
     // 对请求错误做些什么
@@ -29,7 +34,7 @@ axios.interceptors.response.use(
             return Promise.reject(response);
         }
     }, 
-    (error) => {
+    (error:any) => {
         // 处理响应失败
         return Promise.reject(error)
     }

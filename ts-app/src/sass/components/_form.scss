@@ -1,0 +1,71 @@
+.form{
+
+    &__input{
+        font-family: inherit;
+        color: inherit;
+        font-size: 1rem;
+        padding: .6rem 1.5rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, .5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 90%;  
+        display: block;
+        transition: all .3s;
+
+        &:focus{ 
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black,.1);
+            border-bottom: 3px solid $color-primary;
+        }
+
+        &:focus:invalid{
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+        &::-webkit-input-placeholder{
+            color: $color-gray-dark-2;       
+        }
+    }
+
+    &__label{
+        font-size: 1rem;
+        font-weight: 300;
+        margin-left: 1.5rem;
+        margin-top: .4rem;
+        display: block;
+        transition: all .3s;
+    }
+
+    &__input:placeholder-shown + &__label{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-2.5rem);
+    }
+
+    &__radio--group{
+        display: inline-block;
+    }
+
+    &__radio-input{
+        display: none;
+    }
+
+    &__radio-label{
+        font-size: $default-font-size;
+        cursor: pointer;
+        height: 3rem;
+        width: 6rem;
+        line-height: 3rem;
+        text-align: center;
+        display: inline-block;
+        color: $color-white;
+        background-color: rgba($color-gray-dark, .7);
+
+        transition: all .2s;
+    }
+
+    &__radio-input:checked +  &__radio-label{
+        background-color: rgba($color-primary, .9)
+    }
+}
