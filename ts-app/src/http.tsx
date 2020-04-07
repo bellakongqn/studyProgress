@@ -11,12 +11,9 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 // 请求拦截
 axios.interceptors.request.use( (config: AxiosRequestConfig) => {
-    let token = window.localStorage.token;
+    let token = window.localStorage.getItem('token');
     if( token ){
-        console.log(token, ';amdcwkrjvhu')
         config.headers.Authorization = token
-    }else{
-        window.location.href = '/login'
     }
     return config;
 }, (error: any) => {
@@ -35,30 +32,33 @@ axios.interceptors.response.use(
         }
     }, 
     (error:any) => {
+        if (error && error.status === 401) {
+            window.location.href = '/login'
+        }
         // 处理响应失败
         return Promise.reject(error)
     }
 );
 
 // get
-export function get(url:string, params:any):Promise <AxiosResponse>{
+export function get<T = {}>(url:string, params:any):Promise <T>{
     return axios.get(url, {
         params: params
-    })
+    }) 
 }
 
 // post
-export function post(url:string, params:any):Promise <AxiosResponse> { 
+export function post<T = {}>(url:string, params:any):Promise <T> { 
     return axios.post(url, params)
 }
 
 // put
-export function put(url:string, params:any):Promise <AxiosResponse>{
+export function put<T = {}>(url:string, params:any):Promise <T>{
     return axios.put(url, params )
 }
 
 // delete
-export function deleteFc(url:string, params:any):Promise <AxiosResponse>{
+export function deleteFc<T = {}>(url:string, params:any):Promise <T>{
     return axios.delete(url, params)
 }
 
