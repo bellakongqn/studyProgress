@@ -1,4 +1,8 @@
 .form{
+    &__group{
+        display: flex;
+        position: relative;
+    }
 
     &__input{
         font-family: inherit;
@@ -9,7 +13,7 @@
         background-color: rgba($color-white, .5);
         border: none;
         border-bottom: 3px solid transparent;
-        width: 90%;  
+        flex:1;
         display: block;
         transition: all .3s;
 
@@ -29,18 +33,21 @@
     }
 
     &__label{
+        width: 26%;
         font-size: 1rem;
-        font-weight: 300;
-        margin-left: 1.5rem;
+        font-weight: 500;
+        margin-right: 1rem;
         margin-top: .4rem;
         display: block;
         transition: all .3s;
+        text-align: right;
     }
 
-    &__input:placeholder-shown + &__label{
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-2.5rem);
+    &__errMsg{
+        color: $color-secondary-dark;
+        left: calc( 26% + 1rem);
+        top: 100%;
+        position: absolute;
     }
 
     &__radio--group{

@@ -1,6 +1,11 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React from 'react'
+import { useFormik } from 'formik';
 import { get } from '../http'
+import *  as Yup  from 'yup'
 import { useHistory } from 'react-router-dom'
+import Button from '../components/Button'
+import Input from '../components/Input'
+import Radio from '../components/Radio'
 
 interface submitResponse {
     status: number,
@@ -8,67 +13,70 @@ interface submitResponse {
     data: string
 }
 
+interface formInterface {
+    username: string,
+    password: string,
+    toggle: string,
+}
+
 function Login(){
 
-    const [toggle, setToggle] = useState<boolean>(true)
-    const [username , setUsername] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
+    const validationSchema = Yup.object().shape({
+        username:  Yup.string().required('username is Required'),
+        password:  Yup.string().required('password is Required'),
+        toggle: Yup.boolean().required('Required')
+    })
 
     const history = useHistory()
 
-    const params = useMemo(() => ({
-        username,
-        password,
-    }), [username, password])
-
-    const handleSubmit = useCallback(async (e:any) =>{
-        e.preventDefault();
-        const res = await get<submitResponse>('/signUp', params)
-        console.log(res)
-        window.localStorage.setItem('token',res.data)
-
-        history.push('/home')
-
-    }, [history, params])
+    const {handleSubmit, handleChange, values ,errors }  = useFormik({
+        initialValues: {
+            username: '',
+            password: '',
+            toggle:'loginIn',
+        },
+        validationSchema,
+        onSubmit: async (values: formInterface) => {
+            console.log(values)
+            const res = await get<submitResponse>('/signUp', values)
+            window.localStorage.setItem('token',res.data)
+            history.push('/home')
+        },
+    })
 
     return(
         <div className="login">
             <div className="login__content">
-                <form className="form">
-                    <div className="form__group u-margin-bottom-small">
-                        <div className="form__radio--group">
-                            <input type='radio' className="form__radio-input" id="loginIn" name="toggle" checked={toggle} onChange={()=>setToggle(true)}/>
-                            <label htmlFor="loginIn" className="form__radio-label">
-                                Login In
-                            </label>
-                        </div>
-
-                        <div className="form__radio--group">
-                            <input type='radio' className="form__radio-input" id="SignUp" name="toggle" checked={!toggle} onChange={()=>setToggle(false)}/>
-                            <label htmlFor="SignUp" className="form__radio-label">
-                                Sign Up
-                            </label>
-                        </div>
+                <form className="form" onSubmit={handleSubmit}>
+                    <div className="u-margin-bottom-small">
+                        <RadioGroup  onChange={handleChange} value={values.toggle}/>
                     </div>
 
-                    <div className="form__group">
-                        <input type="text" className="form__input" id="userName" placeholder="your name" required
-                            onChange={(e)=>setUsername(e.target.value)}/>
-                        <label htmlFor="userName" className="form__label">Your Name</label>
-                    </div>
+                    <Input type="text" value={values.username} 
+                                        name="username" id="username"
+                                        placeholder="your name"  
+                                        onChange={handleChange} 
+                                        error={errors.username}/>
+                    
+                    <Input type="password" value={values.password} 
+                                            name="password"  id="password" 
+                                            placeholder="your password"  
+                                            onChange={handleChange} 
+                                            error={errors.password}/>
 
-                    <div className="form__group">
-                        <input type="password" className="form__input" id="password" placeholder="your password" required
-                            onChange={(e)=>setPassword(e.target.value)}/>
-                        <label htmlFor="password" className="form__label">Your Password</label>
-                    </div>
-
-                    <button type="submit" className="btn btn--green u-margin-top-small" onClick={handleSubmit}>Submit &rarr;</button>
+                    <Button type="submit" className='btn--green u-margin-top-small'> Submit &rarr; </Button>
 
                 </form>
             </div>
         </div>
     )
 }
+
+const RadioGroup = (props:any)=>(
+    <>
+        <Radio value="loginIn" id="loginIn" name="toggle"  onChange={props.onChange} label="Login In" defaultChecked/>
+        <Radio value="signUp" id="signUp" name="toggle"  onChange={props.onChange} label="Sign Up"/>
+    </>
+)
 
 export default Login;
