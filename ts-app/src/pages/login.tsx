@@ -29,7 +29,7 @@ function Login() {
 
     const history = useHistory()
 
-    const { handleSubmit, handleChange, values, errors, touched, getFieldProps } = useFormik({
+    const { handleSubmit, errors, touched, getFieldProps } = useFormik({
         initialValues: {
             username: '',
             password: '',
@@ -49,8 +49,8 @@ function Login() {
             <div className="login__content">
                 <form className="form" onSubmit={handleSubmit}>
                     <div className="u-margin-bottom-small">
-                        <RadioGroup onChange={handleChange}
-                            value={values.toggle}
+                        <RadioGroup
+                            {...getFieldProps('toggle')}
                         />
                     </div>
 
