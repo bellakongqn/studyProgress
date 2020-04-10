@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './pages/login'
+import { Login } from './pages/login'
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import { AuthRoute } from './components/AuthRoute';
 import { NotFoundPage } from './pages/notFound';

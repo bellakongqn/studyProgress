@@ -25,7 +25,7 @@ const validationSchema = Yup.object().shape({
     toggle: Yup.string().required('Required')
 })
 
-function Login() {
+export const  Login = () => {
 
     const history = useHistory()
 
@@ -83,5 +83,3 @@ const RadioGroup = (props: any) => (
             onChange={props.onChange} label="Sign Up" />
     </>
 )
-
-export default Login;
