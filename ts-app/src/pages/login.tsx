@@ -18,14 +18,14 @@ interface formInterface {
     password: string,
     toggle: string,
 }
+
 const validationSchema = Yup.object().shape({
     username: Yup.string().required('username is Required'),
     password: Yup.string().required('password is Required'),
     toggle: Yup.string().required('Required')
 })
+
 function Login() {
-
-
 
     const history = useHistory()
 
