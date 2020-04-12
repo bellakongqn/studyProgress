@@ -1,18 +1,11 @@
-import React from 'react'
+import React, { ReactNode, ButtonHTMLAttributes } from 'react'
 
-interface ButtonInterface {
-    handleSubmit?: (e: any) => Promise<void>,
-    type: "button" | "submit" | "reset" | undefined,
-    children: string,
-    className?: string,
-}
-
-function Button(props: ButtonInterface){
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
+ 
+export const Button = (props: ButtonProps) => {
     return(
-        <button type={props.type} className={`btn ${props.className}`} onClick={props.handleSubmit}>
+        <button {...props}>
             {props.children}
         </button>
     )
 }
-
-export default Button;

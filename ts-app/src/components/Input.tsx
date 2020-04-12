@@ -1,23 +1,14 @@
-import React from 'react'
+import React, { InputHTMLAttributes } from 'react'
 
-interface InputInterface {
-    id: string,
-    name: string,
-    value: string,
-    type: string,
-    placeholder: string,
-    onChange: (e:any) => void,
-    onBlur: (e: any) => void,
+type InputProps = {
     error?:string,
-}
+} & InputHTMLAttributes<HTMLInputElement>
 
-function Input(props:InputInterface){
+function Input(props:InputProps){
     return(
             <div className="form__group">
                 <label htmlFor={props.id} className="form__label">{props.placeholder}:</label>
-                <input type={props.type} className="form__input" id={props.id} placeholder={props.placeholder}
-                    onBlur={props.onBlur}
-                    onChange={props.onChange}/>
+                <input {...props} className={"form__input" + (props.className ? ` ${props.className}` : '')}/>
                 <div className="form__errMsg">
                     {props.error}
                 </div>

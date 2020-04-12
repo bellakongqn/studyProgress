@@ -1,19 +1,19 @@
-import React from 'react'
+import React, { useMemo, useCallback } from 'react'
 import { useFormik } from 'formik';
 import { get } from '../http'
 import *  as Yup from 'yup'
-import { useHistory } from 'react-router-dom'
-import Button from '../components/Button'
+import { useHistory, Redirect } from 'react-router-dom'
+import { Button } from '../components/Button'
 import Input from '../components/Input'
 import Radio from '../components/Radio'
 
-interface submitResponse {
+type  submitResponse = {
     status: number,
     code: number,
     data: string
 }
 
-interface formInterface {
+type formInterface = {
     username: string,
     password: string,
     toggle: string,
@@ -26,8 +26,15 @@ const validationSchema = Yup.object().shape({
 })
 
 export const  Login = () => {
-
     const history = useHistory()
+    const token = localStorage.getItem('token')
+
+    const handleFormSubmit = useCallback(async (values: formInterface) => {
+        console.log(values)
+        const res = await get<submitResponse>('/signUp', values)
+        window.localStorage.setItem('token', res.data)
+        history.push('/home')
+    }, [history])
 
     const { handleSubmit, errors, touched, getFieldProps } = useFormik({
         initialValues: {
@@ -36,13 +43,14 @@ export const  Login = () => {
             toggle: 'loginIn',
         },
         validationSchema,
-        onSubmit: async (values: formInterface) => {
-            console.log(values)
-            const res = await get<submitResponse>('/signUp', values)
-            window.localStorage.setItem('token', res.data)
-            history.push('/home')
-        },
+        onSubmit: handleFormSubmit,
     })
+
+    if (token) {
+        return (
+            <Redirect to="/home" />
+        )
+    }
 
     return (
         <div className="login">
@@ -70,7 +78,8 @@ export const  Login = () => {
                 </form>
             </div>
         </div>
-    )
+    );
+
 }
 
 const RadioGroup = (props: any) => (

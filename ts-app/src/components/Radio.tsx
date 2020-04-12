@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 
 interface RadioInterface{
     id:string,
@@ -6,7 +6,7 @@ interface RadioInterface{
     label: string,
     value: string,
     checked: boolean,
-    onChange:  (e:any) => void,
+    onChange:  (e: ChangeEvent<HTMLInputElement>) => void,
 }
 
 function Radio( props: RadioInterface){
