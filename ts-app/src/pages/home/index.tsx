@@ -2,6 +2,7 @@ import React, { CSSProperties } from 'react'
 import { NavLink, Switch, Route, useHistory } from 'react-router-dom'
 import { Fruit } from './fruits'
 import { Vegetable } from './vegetable'
+import { MemoCallbackTest } from './useMemo&useCallback'
 
 const activeStyle: CSSProperties = {
     color: '#ffa5d8'
@@ -17,20 +18,25 @@ export const HomePage = () => {
     }
 
     return (
-        <div style={{width: '80vw', margin: '20px auto 0'}}>
+        <div className="home">
             <h2>Welcome Homepage!</h2>
             <button onClick={loginOut}>登出</button>
-            <nav>
-                <NavLink activeStyle={activeStyle} style={{marginLeft: 15, color: '#92ddea'}} to="/home/fruit">fruit</NavLink>
-                <NavLink activeStyle={activeStyle} style={{marginLeft: 15, color: '#92ddea'}} to="/home/vegetable/🥬">vegetable</NavLink>
-            </nav>
+            <div className="home__main">
+                <nav className="home__nav">
+                    <NavLink activeStyle={activeStyle} style={{marginLeft: 15, color: '#92ddea'}} to="/home/fruit">fruit</NavLink>
+                    <NavLink activeStyle={activeStyle} style={{marginLeft: 15, color: '#92ddea'}} to="/home/vegetable/🥬">vegetable</NavLink>
+                    <NavLink activeStyle={activeStyle} style={{marginLeft: 15, color: '#92ddea'}} to="/home/useHooks">useMemo & useCallback</NavLink>
+                </nav>
 
-            <div style={{border: '2px solid green', padding: 20}}>
-                <Switch>
-                    <Route path="/home/fruit" component={Fruit} />
-                    <Route path="/home/vegetable/:kind" component={Vegetable} />
-                </Switch>
+                <div className="home__content">
+                    <Switch>
+                        <Route path="/home/fruit" component={Fruit} />
+                        <Route path="/home/vegetable/:kind" component={Vegetable} />
+                        <Route path="/home/useHooks" component={MemoCallbackTest} />
+                    </Switch>
+                </div>
             </div>
+            
 
         </div>
     )

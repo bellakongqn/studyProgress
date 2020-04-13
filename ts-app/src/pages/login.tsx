@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { useFormik } from 'formik';
 import { get } from '../http'
 import *  as Yup from 'yup'
@@ -73,7 +73,7 @@ export const  Login = () => {
                         {...getFieldProps('password')}
                         error={touched.password && errors.password ? errors.password : undefined} />
 
-                    <Button type="submit" className='btn--green u-margin-top-small'> Submit &rarr; </Button>
+                    <Button type="submit" className='btn btn--green u-margin-top-small'> Submit &rarr; </Button>
 
                 </form>
             </div>
