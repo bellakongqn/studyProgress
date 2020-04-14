@@ -3,6 +3,7 @@ import { NavLink, Switch, Route, useHistory } from 'react-router-dom'
 import { Fruit } from './fruits'
 import { Vegetable } from './vegetable'
 import { MemoCallbackTest } from './useMemo&useCallback'
+import { UploadPage } from './uploadPage'
 
 const activeStyle: CSSProperties = {
     color: '#ffa5d8'
@@ -26,6 +27,7 @@ export const HomePage = () => {
                     <NavLink activeStyle={activeStyle} style={{marginLeft: 15, color: '#92ddea'}} to="/home/fruit">fruit</NavLink>
                     <NavLink activeStyle={activeStyle} style={{marginLeft: 15, color: '#92ddea'}} to="/home/vegetable/🥬">vegetable</NavLink>
                     <NavLink activeStyle={activeStyle} style={{marginLeft: 15, color: '#92ddea'}} to="/home/useHooks">useMemo & useCallback</NavLink>
+                    <NavLink activeStyle={activeStyle} style={{marginLeft: 15, color: '#92ddea'}} to="/home/upload">upload</NavLink>
                 </nav>
 
                 <div className="home__content">
@@ -33,6 +35,7 @@ export const HomePage = () => {
                         <Route path="/home/fruit" component={Fruit} />
                         <Route path="/home/vegetable/:kind" component={Vegetable} />
                         <Route path="/home/useHooks" component={MemoCallbackTest} />
+                        <Route path="/home/upload" component={UploadPage} />
                     </Switch>
                 </div>
             </div>
