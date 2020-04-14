@@ -5,8 +5,11 @@ type InputFileProps =   {
 
 export const InputFile = (props:InputFileProps) =>{
     return(
-        <div>
-            <input type="file" accept="image/*" multiple {...props}/>
+        <div className="upload__file">
+            <div className="upload__label">
+                <img src={require("../img/add-icon.png")} alt="add-icon"/>
+            </div>
+            <input type="file" accept="image/*" multiple {...props} className="upload__input"/>
         </div>
     )
 }

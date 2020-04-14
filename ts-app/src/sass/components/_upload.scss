@@ -1,0 +1,32 @@
+.upload{
+
+    &__file{
+        border: 1px solid rgba($color-gray-dark, .5);
+        display: block;
+        width: 12rem;
+        height: 8rem;
+        position: relative;
+    }
+    
+    &__label{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+
+        img{
+            width: 80%;
+        }
+
+    }
+
+    &__input{
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        outline: none;
+    }
+
+}

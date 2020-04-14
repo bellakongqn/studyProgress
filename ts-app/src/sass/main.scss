@@ -9,7 +9,9 @@
 // components
 @import './components/button';
 @import './components/form';
+@import './components//upload';
 
 // pages
+@import './pages/home';
 @import './pages/login';
-@import './pages/home'
+@import './pages/uploadPage';

@@ -21,12 +21,15 @@ export const UploadPage = () =>{
 
     return(
         <div>
-            <InputFile onChange={handleChange}/>
-            {
-                files.map(( item, idx)=>(
-                    <img key={idx} src={item.thumb} alt=""/>
-                ))
-            }
+            <div className="upload__main">
+                {
+                    files.map(( item, idx)=>(
+                        <img key={idx} src={item.thumb} alt="" className="upload__img"/>
+                    ))
+                }
+                <InputFile onChange={handleChange}/>
+            </div>
+            
         </div>
     )
 }
