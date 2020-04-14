@@ -1,23 +1,37 @@
-import React, { useState, HtmlHTMLAttributes } from 'react'
+import React, { useState, HtmlHTMLAttributes, useCallback, ChangeEvent, useRef } from 'react'
 import { InputFile } from '../../components/InputFile'
+import { uploadImage } from '../../services/upload'
 
-type imageProps =  {
+type ImageProps =  {
     thumb:string,
-} & HtmlHTMLAttributes<HTMLInputElement>
+}
 
 export const UploadPage = () =>{
 
-    const [files, setFiles] = useState<Array<imageProps>>([])
+    const [files, setFiles] = useState<ImageProps[]>([])
+    const inputRef = useRef<HTMLInputElement>(null)
 
-    const handleChange = (e:any) =>{
+    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) =>{
         e.preventDefault()
-        let filesCurr = e.target.files
-        for (let i = 0; i < filesCurr.length; i++) {
-            filesCurr[i].thumb = URL.createObjectURL(filesCurr[i])
+        const filesCurr = e.target.files
+        if (filesCurr !== null) {
+            // const newList: ImageProps[] = []
+            // for (let i = 0; i < filesCurr.length; i++) {
+            //     newList.push({
+            //         thumb: URL.createObjectURL(filesCurr[i])
+            //     })
+            // }
+            // setFiles([...files, ...newList])
+            uploadImage(filesCurr)
+                .then(res => {
+                    console.log(res)
+                    if (inputRef.current) {
+                        inputRef.current.value = ''
+                    }
+                    setFiles([...files, ...res.data.map(s => ({thumb: s}))])
+                })
         }
-        filesCurr = Array.prototype.slice.call(filesCurr, 0)
-        setFiles([...files, ...filesCurr])
-    }
+    }, [])
 
     return(
         <div>
@@ -27,7 +41,7 @@ export const UploadPage = () =>{
                         <img key={idx} src={item.thumb} alt="" className="upload__img"/>
                     ))
                 }
-                <InputFile onChange={handleChange}/>
+                <InputFile ref={inputRef} onChange={handleChange}/>
             </div>
             
         </div>
