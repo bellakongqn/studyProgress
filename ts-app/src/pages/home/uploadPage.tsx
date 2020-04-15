@@ -1,6 +1,6 @@
 import React, { useState, useCallback, ChangeEvent, useRef } from 'react'
 import { InputFile } from '../../components/InputFile'
-// import { uploadImage } from '../../services/upload'
+import { uploadImage } from '../../services/upload'
 
 type ImageProps =  {
     thumb:string,
@@ -15,21 +15,21 @@ export const UploadPage = () =>{
         e.preventDefault()
         const filesCurr = e.target.files
         if (filesCurr !== null) {
-            const newList: ImageProps[] = []
-            for (let i = 0; i < filesCurr.length; i++) {
-                newList.push({
-                    thumb: URL.createObjectURL(filesCurr[i])
-                })
-            }
-            setFiles([...files, ...newList])
-            // uploadImage(filesCurr)
-            //     .then(res => {
-            //         console.log(res)
-            //         if (inputRef.current) {
-            //             inputRef.current.value = ''
-            //         }
-            //         setFiles([...files, ...res.data.map(s => ({thumb: s}))])
+            // const newList: ImageProps[] = []
+            // for (let i = 0; i < filesCurr.length; i++) {
+            //     newList.push({
+            //         thumb: URL.createObjectURL(filesCurr[i])
             //     })
+            // }
+            // setFiles([...files, ...newList])
+            uploadImage(filesCurr)
+                .then(res => {
+                    console.log(res)
+                    if (inputRef.current) {
+                        inputRef.current.value = ''
+                    }
+                    setFiles([...files, ...res.data.map(s => ({thumb: s}))])
+                })
         }
     }, [files])
 

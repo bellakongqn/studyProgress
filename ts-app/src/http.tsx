@@ -48,7 +48,7 @@ export function get<T = {}>(url:string, params:any):Promise <T>{
 }
 
 // post
-export function post<T = {}>(url:string, params:any):Promise <T> { 
+export function post<T = {}>(url:string, params:any, config?: AxiosRequestConfig):Promise <T> { 
     return axios.post(url, params)
 }
 
