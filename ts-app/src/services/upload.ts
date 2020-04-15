@@ -1,11 +1,9 @@
 import { post } from "../http";
+import { AxiosRequestConfig } from "axios";
 
-export const uploadImage = (files: FileList) => {
+export const uploadImage = (files: FileList, onUploadProgress: AxiosRequestConfig['onUploadProgress']) => {
     const config = {
-        onUploadProgress: function(progressEvent: { loaded: number; total: number; }) {
-            var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            console.log(percentCompleted)
-        }
+        onUploadProgress: onUploadProgress
     }
     const data = new FormData()
     for (let i = 0; i< files.length; i++) {

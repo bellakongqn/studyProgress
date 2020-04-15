@@ -2,16 +2,21 @@ import React, { useState, useCallback, ChangeEvent, useRef } from 'react'
 import { InputFile } from '../../components/InputFile'
 import { uploadImage } from '../../services/upload'
 
-type ImageProps =  {
-    thumb:string,
+type ImageProps = {
+    thumb: string,
 }
 
-export const UploadPage = () =>{
-
+export const UploadPage = () => {
     const [files, setFiles] = useState<ImageProps[]>([])
     const inputRef = useRef<HTMLInputElement>(null)
+    const handleUploadProgress = useCallback(
+        (progressEvent: { loaded: number; total: number; }) => {
+            var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            console.log(percentCompleted)
+        },
+        [])
 
-    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) =>{
+    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         const filesCurr = e.target.files
         if (filesCurr !== null) {
@@ -22,42 +27,43 @@ export const UploadPage = () =>{
             //     })
             // }
             // setFiles([...files, ...newList])
-            uploadImage(filesCurr)
+
+            uploadImage(filesCurr, handleUploadProgress)
                 .then(res => {
                     console.log(res)
                     if (inputRef.current) {
                         inputRef.current.value = ''
                     }
-                    setFiles([...files, ...res.data.map(s => ({thumb: s}))])
+                    setFiles([...files, ...res.data.map(s => ({ thumb: s }))])
                 })
         }
-    }, [files])
+    }, [files, handleUploadProgress])
 
-    const handleDelete = (key:Object)=>{
-        setFiles([...files.filter(item=>item!==key)])
+    const handleDelete = (key: Object) => {
+        setFiles([...files.filter(item => item !== key)])
     }
 
-    const hanldePreview = () =>{
+    const hanldePreview = () => {
         console.log('preview')
     }
 
-    return(
+    return (
         <div>
             <div className="upload__main">
                 {
-                    files.map(( item, idx)=>(
+                    files.map((item, idx) => (
                         <div className="upload__content" key={idx}>
                             <div className="upload__content-operation">
-                                <img src={require('../../img/delete-icon.png')} alt="delete-icon" onClick={()=>handleDelete(item)}/>
-                                <img src={require('../../img/preview-icon.png')} alt="perview-icon" onClick={()=>hanldePreview()}/>
+                                <img src={require('../../img/delete-icon.png')} alt="delete-icon" onClick={() => handleDelete(item)} />
+                                <img src={require('../../img/preview-icon.png')} alt="perview-icon" onClick={() => hanldePreview()} />
                             </div>
-                            <img key={idx} src={item.thumb} alt="" className="upload__content-img"/>
+                            <img key={idx} src={item.thumb} alt="" className="upload__content-img" />
                         </div>
                     ))
                 }
-                <InputFile ref={inputRef} onChange={handleChange}/>
+                <InputFile ref={inputRef} onChange={handleChange} />
             </div>
-            
+
         </div>
     )
 }

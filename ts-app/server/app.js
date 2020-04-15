@@ -18,12 +18,19 @@ app.post('/api/upload', upload.array('files[]', 10), function(req, res) {
     console.log(req.files)
     res.setHeader('Content-Type', 'application/json')
     Promise.all(req.files.map(file => (new Promise(function(res, rej) {
-        fs.writeFile('./upload/' + file.originalname, fs.createReadStream(file.path), 'binary', function(err) {
-            if (err) {
-                rej(err)
-            } else{
-                res('http://localhost:4000/' + file.originalname)
-            }
+        // fs.writeFile('./upload/' + file.originalname, fs.createReadStream(file.path), 'binary', function(err) {
+        //     if (err) {
+        //         rej(err)
+        //     } else{
+        //         res('http://localhost:4000/' + file.originalname)
+        //     }
+        // })
+        const writestream = fs.createWriteStream('./upload/' + file.originalname)
+        const readstream = fs.createReadStream(file.path)
+        readstream.pipe(writestream)
+
+        writestream.on("finish", () => {
+            res('http://localhost:4000/' + file.originalname)
         })
     }))))
         .then((filepaths) => {
