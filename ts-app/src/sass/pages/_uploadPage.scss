@@ -14,6 +14,19 @@
         
         position: relative;
 
+        &-progress{
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 3rem;
+            height: 1.5rem;
+            text-align: center;
+            background-color: rgba($color-gray-dark-3, .8);
+            color: rgba($color-white, .7);
+            border-radius: 3px;
+            z-index: 20;
+        }
+
         &-img{
             object-fit: cover;
             width: 100%;
@@ -43,7 +56,8 @@
             z-index: 10;
         }
 
-        &:hover &-img{
+        // &-operation + &-img 当操作栏展示时 img 存在效果 即上传成功时展示
+        &:hover &-operation + &-img{
             transform: scale(1);
             filter: blur(1px);
         }

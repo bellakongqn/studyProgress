@@ -8,11 +8,16 @@ type ImageProps = {
 
 export const UploadPage = () => {
     const [files, setFiles] = useState<ImageProps[]>([])
+    const [uploadPercent, setUploadPercent] = useState<Number>(0)
     const inputRef = useRef<HTMLInputElement>(null)
     const handleUploadProgress = useCallback(
         (progressEvent: { loaded: number; total: number; }) => {
-            var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            console.log(percentCompleted)
+            let percent = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            console.log(percent)
+
+            if(percent<100){
+                setUploadPercent(percent);
+            }
         },
         [])
 
@@ -28,13 +33,17 @@ export const UploadPage = () => {
             // }
             // setFiles([...files, ...newList])
 
+            /*上传成功之前展示 本地thumb
+                成功后更换为接口值
+            */
+
             uploadImage(filesCurr, handleUploadProgress)
                 .then(res => {
-                    console.log(res)
                     if (inputRef.current) {
                         inputRef.current.value = ''
                     }
                     setFiles([...files, ...res.data.map(s => ({ thumb: s }))])
+                    setUploadPercent(100)
                 })
         }
     }, [files, handleUploadProgress])
@@ -53,10 +62,23 @@ export const UploadPage = () => {
                 {
                     files.map((item, idx) => (
                         <div className="upload__content" key={idx}>
-                            <div className="upload__content-operation">
-                                <img src={require('../../img/delete-icon.png')} alt="delete-icon" onClick={() => handleDelete(item)} />
-                                <img src={require('../../img/preview-icon.png')} alt="perview-icon" onClick={() => hanldePreview()} />
-                            </div>
+                            {/* 进度 <  时 */}
+                            {
+                                ( uploadPercent > 0 && uploadPercent!==100 )  && (
+                                    <div className="upload__content-progress">
+                                        {uploadPercent + '%'}
+                                    </div>
+                                )
+                            }
+                            {/* 上传成功时 展示操作按钮 */}
+                            {
+                                uploadPercent===100 && (
+                                    <div className="upload__content-operation">
+                                        <img src={require('../../img/delete-icon.png')} alt="delete-icon" onClick={() => handleDelete(item)} />
+                                        <img src={require('../../img/preview-icon.png')} alt="perview-icon" onClick={() => hanldePreview()} />
+                                    </div>
+                                )
+                            }
                             <img key={idx} src={item.thumb} alt="" className="upload__content-img" />
                         </div>
                     ))
