@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useFormik } from 'formik';
 import { get } from '../http'
 import *  as Yup from 'yup'
@@ -6,6 +6,7 @@ import { useHistory, Redirect } from 'react-router-dom'
 import { Button } from '../components/Button'
 import Input from '../components/Input'
 import Radio from '../components/Radio'
+import { Modal } from '../components/Modal';
 
 type  submitResponse = {
     status: number,
@@ -28,6 +29,7 @@ const validationSchema = Yup.object().shape({
 export const  Login = () => {
     const history = useHistory()
     const token = localStorage.getItem('token')
+    const [visible, setVisible] = useState(false)
 
     const handleFormSubmit = useCallback(async (values: formInterface) => {
         console.log(values)
@@ -46,11 +48,17 @@ export const  Login = () => {
         onSubmit: handleFormSubmit,
     })
 
+    const handleWechat = useCallback(() => {
+        setVisible(true) 
+     }, [])
+
     if (token) {
         return (
             <Redirect to="/home" />
         )
     }
+
+    
 
     return (
         <div className="login">
@@ -72,9 +80,17 @@ export const  Login = () => {
                         placeholder="your password"
                         {...getFieldProps('password')}
                         error={touched.password && errors.password ? errors.password : undefined} />
+                    
+                    <div className="wechat__content">
+                        <div className="wechat__content-img">
+                            <img src={require('../img/weChat.svg')} alt="weChat Icon" onClick={handleWechat}/>
+                        </div>
+                    </div>
 
                     <Button type="submit" className='btn btn--green u-margin-top-small'> Submit &rarr; </Button>
-
+                    <Modal visible={visible} onClose={() => setVisible(false)}>
+                        <h3>weChat Login</h3>
+                    </Modal>
                 </form>
             </div>
         </div>
