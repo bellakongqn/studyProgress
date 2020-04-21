@@ -41,7 +41,7 @@ axios.interceptors.response.use(
 );
 
 // get
-export function get<T = {}>(url:string, params:any):Promise <T>{
+export function get<T = {}>(url:string, params?:any):Promise <T>{
     return axios.get(url, {
         params: params
     }) 
