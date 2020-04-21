@@ -89,7 +89,12 @@ export const  Login = () => {
 
                     <Button type="submit" className='btn btn--green u-margin-top-small'> Submit &rarr; </Button>
                     <Modal visible={visible} onClose={() => setVisible(false)}>
-                        <h3>weChat Login</h3>
+                        <div className="scan__content">
+                            <h3 className="scan__content-title">扫码登录</h3>
+                            <img src={require('../img/nat-10.jpg')}  alt="erweima" className="scan__content-img"/>
+                            <div  className="split-line u-margin-bottom-small scan-dot" />
+                            <div className="scan__content-footer">使用微信扫一扫登录</div>
+                        </div>
                     </Modal>
                 </form>
             </div>
