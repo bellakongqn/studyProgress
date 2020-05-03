@@ -1,13 +1,21 @@
-import { useEffect } from "react"
+import { useCallback, useRef } from "react"
 
-export const useDebounce = (fn:()=>void, ms:number) =>{
 
-    useEffect(()=>{
-        const handler = setTimeout(() => {
+
+export const useDebounceFn = (fn:()=>void, ms:number): () => void =>{
+    const timeoutId = useRef<null | number>(null)
+
+    const debouncedFn = useCallback(() => {
+        if (timeoutId.current !== null) {
+            clearTimeout(timeoutId.current)
+        }
+
+        timeoutId.current = window.setTimeout(() => {
             fn();
-        }, ms);
-        return () => {
-            clearTimeout(handler);
-        };
-    },[fn, ms])
+            timeoutId.current = null
+        }, ms)
+    }, [fn, ms])
+
+
+    return debouncedFn
 }
