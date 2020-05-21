@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+html {
+    min-height: 100%;
+}
+
+.healthy-snacks {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 680px;
+    background: #fff;
+    border-radius: 3px;
+}
+
+.healthy-snacks .featured-image {
+    position: relative;
+}
+
+.healthy-snacks .featured-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.healthy-snacks .featured-image .arrow {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0px;
+    background-color: #fff;
+}
+
+.healthy-snacks .featured-image .arrow:before,
+.healthy-snacks .featured-image .arrow:after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    /* 伪元素上升至图片 */
+    width: 80%;
+    height: 20px;
+    background-color: inherit;
+}
+
+.healthy-snacks .featured-image .arrow:before {
+    /* right arrow位置 */
+    right: 80%;
+    transform-origin: 100% 100%;
+    /* 旋转中心 */
+    transform: skewX(45deg); 
+    /* 旋转 */
+}
+.healthy-snacks .featured-image .arrow:after {
+    left: 20%;
+    transform-origin: 0 100%;
+    transform: skewX(-45deg);
+}
