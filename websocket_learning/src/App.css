@@ -1,0 +1,65 @@
+* > {
+  box-sizing: border-box;
+}
+
+.App {
+  background-color: #282c34;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.App main {
+  flex: 1;
+  background-color: thistle;
+}
+
+.msg {
+  margin: 10px 30px;
+  display: flex;
+  height: 40px;
+  background-color: wheat;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.msg span {
+  padding: 0 10px;
+  border-radius: 4px;
+  background-color: violet;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.msg p {
+  color: #333333;
+}
+
+.App footer {
+  height: 60px;
+  padding: 10px;
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+input {
+  flex: 1;
+  font-size: 20px;
+  margin-right: 20px;
+  height: 40px;
+}
+
+button {
+  width: 80px;
+  height: 50px;
+  border: none;
+  background: linear-gradient(90deg, rgba(204,193,42,0.9654236694677871) 0%, rgba(16,188,223,1) 100%);
+  color: white;
+  font-size: 24px;
+  border-radius: 4px;
+}
+
