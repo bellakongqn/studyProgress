@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        .clipPath {
+            width: 100vw;
+            height: 70vh;
+            background: url('./green.webp');
+            background-size: cover;
+            clip-path: polygon(0% 0%, 100% 0, 100% 70%, 0% 100%);
+        }
+        .skew {
+            width: 50vw;
+            height: 200px;
+            margin: 20px auto;
+            background: url('./green.webp');
+            background-size: cover;
+            transform: skewX(-20deg);
+        }
+        .skewContent {
+            transform: skewX(20deg);
+        }
+        .linear {
+            width: 50vw;
+            height: 200px;
+            margin: 0 auto;
+            border: 1px solid #e7e7e7;
+            background-image: linear-gradient(105deg, #fff 50%, transparent 50%),
+            url('./green.webp');
+            background-size: cover;
+        }
+        .bgClip {
+            background: linear-gradient( to right, red , blue);
+            width: 50vw;
+            height: 200px;
+            margin: 20px auto;
+            font-size: 30px;
+            text-align: center;
+            vertical-align: middle;
+            background-clip: text;
+            -webkit-background-clip:text;
+            -text-fill-color:transparent;
+            -webkit-text-fill-color:transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="skew">
+        <div class="skewContent">aaaaaa</div>
+    </div>
+    <div class="clipPath">33</div>
+    <div class="linear">111</div>
+    <div class="bgClip">hahahhaha</div>
+</body>
+</html>
